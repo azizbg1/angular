@@ -1,0 +1,12 @@
+<div class="fournisseur-cadre" *ngFor="let fournisseur of list">
+    
+    <div *ngIf="fournisseur.idFournisseur <= 100">
+        <fieldset [ngStyle]="{'background-color': fournisseur.libelle === 'hp' ? 'green' : 'yellow'}"
+          (dblClick)="delete(fournisseur.idFournisseur)">
+      <h2>ID du fournisseur : {{ fournisseur.idFournisseur }}</h2>
+      <p>libelle : {{ fournisseur.libelle }}</p>
+      <p [style.font-weight]="getColor(fournisseur.code)">Code du fournisseur : {{ fournisseur.code }}</p>
+    </fieldset>
+    </div>
+
+  </div>
