@@ -1,0 +1,51 @@
+<div style="text-align: center;">
+    <h2>Registration Form</h2>
+    <form #f="ngForm" (ngSubmit)="add(f)" style="display: inline-block; text-align: left;">
+      <div class="mb-3">
+        <div class="form-group">
+            <label for="userFirstName">First Name</label>
+            <input type="text" class="form-control"   placeholder="Enter First Name" required minlength="3"  name="firstName" [(ngModel)]="user.firstName" ngModel #firstName="ngModel">
+            <div class ="alert alert-danger" *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
+              <div *ngIf="firstName.errors!['required']"  >firstName is reequired !</div>
+              <div *ngIf="firstName.errors!['minlength']"  >firstName must be at least 3 carac</div>
+        </div>
+
+           touched: {{firstName.touched}}<br>
+           pristine : {{firstName.pristine}}<br>
+           dirty : {{firstName.dirty}}<br>
+           untouched : {{firstName.untouched}}<br>
+           valid : {{firstName.valid}}<br>
+           invalid : {{firstName.invalid}}<br>
+           errors : {{firstName.errors|json}}<br>
+          </div>
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Last Name</label>
+        <input type="text" class="form-control" [(ngModel)]="user.lastName"  name="name" ngModel >
+      </div>
+      <div class="mb-3">
+        <label for="birthdate" class="form-label">Birthdate</label>
+        <input type="date" class="form-control" [(ngModel)]="user.birthDate"  name="birthday" ngModel >
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" [(ngModel)]="user.email"   name="email" ngModel aria-describedby="emailHelp">
+        
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="user.password"  name="password" ngModel >
+      </div>
+      <div class="mb-3">
+        <label for="profession" class="form-label">Profession</label>
+        <input type="text" class="form-control" [(ngModel)]="user.profession"  name="profession" ngModel >
+      </div>
+      <div class="mb-3">
+        <label for="customercategory" class="form-label">Customer Category</label>
+        <input type="text" class="form-control" name="Category" value="Customer" readonly >
+      </div>
+      <div class="mb-3">
+        <input type="submit" class="btn btn-primary" value="Add" [disabled]="f.invalid">
+    </div>
+    </form>
+  </div>

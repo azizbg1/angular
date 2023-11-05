@@ -1,0 +1,74 @@
+<!-- add-product-td.component.html -->
+<div style="text-align: center;">
+    <h2>Registration Form</h2>
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" style="display: inline-block; text-align: left;">
+
+    <div class="form-group">
+      <label for="productId">Id produit</label>
+      <input type="number" class="form-control" id="productId" name="productId" [(ngModel)]="product.productId"  required>
+      
+    </div>
+  
+    <div class="form-group">
+        <label for="code">Code</label>
+        <input type="text" class="form-control" id="code" name="code" [(ngModel)]="product.code" required pattern="[a-zA-Z0-9]{8}">
+        <!-- Ajoutez le pattern ici -->
+    
+        <!-- Afficher le message d'erreur en cas d'erreur de validation -->
+        <div *ngIf="productForm.controls['code'].invalid && (productForm.controls['code'].dirty || productForm.controls['code'].touched)">
+          <div *ngIf="productForm.controls['code'].hasError('required')">Le code est obligatoire.</div>
+          <div *ngIf="productForm.controls['code'].hasError('pattern')">Le code doit contenir exactement 8 caractères alphanumériques.</div>
+        </div>
+      </div>
+  
+    <div class="form-group">
+      <label for="libelle">Libelle</label>
+      <input type="text" class="form-control" id="libelle" name="libelle" [(ngModel)]="product.libelle"  required minlength="3">
+      <div *ngIf="productForm.controls['libelle'].invalid && (productForm.controls['libelle'].dirty || productForm.controls['libelle'].touched)">
+        <div *ngIf="productForm.controls['libelle'].hasError('required')">Le libelle est obligatoire.</div>
+        <div *ngIf="productForm.controls['libelle'].hasError('minlength')">Le libelle doit contenir au moins 3 caractères.</div>
+      </div>
+  
+    </div>
+  
+    <div class="form-group">
+      <label for="prixUnitaire">Prix unitaire</label>
+      <input type="number" class="form-control" id="prixUnitaire" name="prixUnitaire" [(ngModel)]="product.prixUnitaire" required pattern="[1-9][0-9]*">
+      <div *ngIf="productForm.controls['prixUnitaire'].hasError('required')">Le prix unitaire est obligatoire.</div>
+      <div *ngIf="productForm.controls['prixUnitaire'].hasError('pattern')">Le prix unitaire doit contenir uniquement des chiffres.</div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid" *ngIf="!additionalFieldsVisible">Suivant</button>
+
+<div *ngIf="additionalFieldsVisible">
+  <!-- Champs à afficher après avoir appuyé sur "Suivant" -->
+
+  <!-- ... Les champs supplémentaires ... -->
+
+  
+    <div class="form-group">
+      <label for="idDetailsProduit">Id détails produit</label>
+      <input type="number" class="form-control" id="idDetailsProduit" name="idDetailsProduit" [(ngModel)]="product.idDetailsProduit" required>
+    </div>
+  
+    <!-- Champ Date de création -->
+    <div class="form-group">
+      <label for="dateCreation">Date de création</label>
+      <input type="date" class="form-control" id="dateCreation" name="dateCreation" [(ngModel)]="product.dateCreation" required>
+  </div>
+  
+  <div class="form-group" *ngIf="(productForm.controls['dateCreation'].touched || productForm.controls['dateCreation'].dirty)">
+      <label for="dateDerniereModification">Date de dernière modification</label>
+      <input type="date" class="form-control" id="dateDerniereModification" name="dateDerniereModification" [(ngModel)]="product.dateDerniereModification" required>
+  </div>
+  
+    <!-- Catégorie produit toujours "Electromenager" -->
+    <div class="form-group">
+      <label for="categorieProduit">Catégorie produit</label>
+      <input type="text" class="form-control" name="categorieProduit" value="Electromenager" readonly>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid" *ngIf="additionalFieldsVisible && !productForm.invalid">Ajouter</button>
+
+</form>
+
+  
